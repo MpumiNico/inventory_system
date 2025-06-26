@@ -1,0 +1,28 @@
+System Name: Inventory Management System
+Target User: Shop owner or inventory manager of a small retail store
+
+Main Goals:
+
+Keep track of product stock levels
+
+Automatically notify the user when stock is low
+
+Record sales for reporting
+
+Generate basic sales reports
+
+Key Functionalities:
+
+Add new products
+
+View, update, or delete product details
+
+Track stock quantity for each product
+
+Set low-stock thresholds
+
+Notify when stock is below threshold
+
+Record sales with date and quantity
+
+Generate 30-day sales reports
