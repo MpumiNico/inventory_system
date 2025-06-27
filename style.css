@@ -1,0 +1,15 @@
+body {
+    font-family: Arial;
+    padding: 20px;
+    background-color: #f7f7f7;
+}
+a {
+    text-decoration: none;
+    padding: 5px 10px;
+    background: #333;
+    color: white;
+    margin-right: 10px;
+}
+a:hover {
+    background: #555;
+}
