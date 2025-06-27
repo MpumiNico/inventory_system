@@ -1,0 +1,41 @@
+# Task 4: Test Cases for Inventory System
+
+Test Case 1: Add Product
+- Input: Name = "Soap", Desc = "Bath soap", Price = 15.00
+- Expected: Product appears in product list
+- Status: Pass
+
+Test Case 2: Add Stock
+- Input: Product ID = 1, Quantity = 50, Threshold = 10
+- Expected: Stock is added or updated
+- Status: Pass
+
+Test Case 3: Record Sale
+- Input: Product ID = 1, Quantity Sold = 5
+- Expected: Sale appears in report; stock decreases
+- Status: Pass
+
+Test Case 4: View Sales Report
+- Input: Navigate to sales.php
+- Expected: Shows recent sales
+- Status: Pass
+
+Test Case 5: Low Stock Alert
+- Input: Stock quantity below threshold
+- Expected: Alert displayed in alert.php
+- Status: Pass
+
+Test Case 6: Login with valid credentials
+- Input: Correct username & password
+- Expected: Redirect to dashboard
+- Status: Pass
+
+Test Case 7: Login with invalid credentials
+- Input: Wrong username/password
+- Expected: Error message shown
+- Status: Pass
+
+Test Case 8: Register a new user
+- Input: Username = admin, Password = admin123
+- Expected: Success message
+- Status: Pass

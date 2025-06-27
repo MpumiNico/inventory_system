@@ -1,0 +1,12 @@
+# Task 4: Functional Testing Report
+
+System was tested manually using form inputs and feature navigation.
+
+ Features Working:
+- Product management (add/delete)
+- Stock updates and thresholds
+- Sales recording
+- 30-day sales reports
+- Low stock alerts
+- Login, logout, registration
+

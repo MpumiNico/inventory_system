@@ -1,0 +1,32 @@
+# Task 4: User Guide - Inventory Management System
+
+## Setup
+
+1. Import `inventory_db.sql` into phpMyAdmin
+2. Copy files into your web server directory (e.g. `htdocs/`)
+3. Edit `config.php` if your DB settings differ
+4. Open `registration.php` in browser to create an account
+
+## Usage
+
+- Login via `login.php`
+- Dashboard is in `index.php`
+- Navigate to:
+  - `products.php`: Manage product info
+  - `stock.php`: Add/update stock levels
+  - `sales.php`: Record sales and view report
+  - `alert.php`: View low stock notifications
+  - `logout.php`: Log out
+
+## Notes
+
+- Sales reduce stock automatically
+- Alerts show if quantity < threshold
+- You can edit code to add new features (e.g., product categories)
+
+## Support
+
+This system is For production use, add:
+- Form validation
+- User role
+- Secure authentication
