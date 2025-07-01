@@ -5,7 +5,7 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 include 'config.php';
-// Get summary counts
+//summary counts
 $product_count = $conn->query("SELECT COUNT(*) FROM products")->fetch_row()[0];
 $stock_count = $conn->query("SELECT COUNT(*) FROM stock")->fetch_row()[0];
 $sales_count = $conn->query("SELECT COUNT(*) FROM sales")->fetch_row()[0];
