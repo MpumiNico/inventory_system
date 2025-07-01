@@ -1,7 +1,7 @@
 <?php
 include 'config.php';
 
-// If supplier_id is set, show single supplier details (existing behavior)
+
 if (isset($_GET['supplier_id'])) {
     $supplier_id = intval($_GET['supplier_id']);
     $result = $conn->query("SELECT * FROM suppliers WHERE supplier_id = $supplier_id");
@@ -44,7 +44,7 @@ if (isset($_GET['supplier_id'])) {
     exit;
 }
 
-// Handle Add Supplier
+
 if (isset($_POST['add_supplier'])) {
     $name = $conn->real_escape_string($_POST['supplier_name']);
     $email = $conn->real_escape_string($_POST['email']);
@@ -52,7 +52,7 @@ if (isset($_POST['add_supplier'])) {
     $conn->query("INSERT INTO suppliers (supplier_name, email, contact_no) VALUES ('$name', '$email', '$contact')");
     echo "<div class='alert alert-success mt-3 animate__animated animate__fadeInDown'>Supplier added successfully!</div>";
 }
-// Handle Edit Supplier
+
 if (isset($_POST['update_supplier'])) {
     $id = intval($_POST['supplier_id']);
     $name = $conn->real_escape_string($_POST['supplier_name']);
@@ -61,14 +61,14 @@ if (isset($_POST['update_supplier'])) {
     $conn->query("UPDATE suppliers SET supplier_name='$name', email='$email', contact_no='$contact' WHERE supplier_id=$id");
     echo "<div class='alert alert-success mt-3 animate__animated animate__fadeInDown'>Supplier updated successfully!</div>";
 }
-// Handle Delete Supplier
+
 if (isset($_GET['delete'])) {
     $id = intval($_GET['delete']);
     $conn->query("DELETE FROM suppliers WHERE supplier_id=$id");
     echo "<div class='alert alert-danger mt-3 animate__animated animate__fadeInDown'>Supplier deleted.</div>";
 }
 
-// If editing, get supplier data
+
 $edit_supplier = null;
 if (isset($_GET['edit'])) {
     $edit_id = intval($_GET['edit']);
