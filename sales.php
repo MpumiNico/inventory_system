@@ -52,10 +52,10 @@
             $qty = $_POST['qty'];
             $sale_date = date('Y-m-d');
 
-            // Insert sale record
+            
             $conn->query("INSERT INTO sales (product_id, quantity_sold, sale_date) VALUES ($product_id, $qty, '$sale_date')");
 
-            // Reduce stock
+            
             $conn->query("UPDATE stock SET quantity = quantity - $qty WHERE product_id = $product_id");
 
             echo "<div class='alert alert-success mt-3 animate__animated animate__fadeInDown'>Sale recorded successfully!</div>";
@@ -83,7 +83,7 @@
                 </thead>
                 <tbody>
                 <?php
-                // Edit sale logic
+                
                 if (isset($_POST['update'])) {
                     $id = intval($_POST['id']);
                     $qty = intval($_POST['qty']);
@@ -93,13 +93,13 @@
                     $stmt->execute();
                     echo "<div class='alert alert-success mt-3 animate__animated animate__fadeInDown'>Sale updated successfully!</div>";
                 }
-                // Delete sale logic
+                
                 if (isset($_GET['delete'])) {
                     $id = intval($_GET['delete']);
                     $conn->query("DELETE FROM sales WHERE sale_id=$id");
                     echo "<div class='alert alert-danger mt-3 animate__animated animate__fadeInDown'>Sale deleted.</div>";
                 }
-                // Display edit form if edit param is set
+                
                 if (isset($_GET['edit'])) {
                     $edit_id = intval($_GET['edit']);
                     $edit_result = $conn->query("SELECT s.*, p.product_name FROM sales s JOIN products p ON s.product_id = p.product_id WHERE s.sale_id=$edit_id");
@@ -121,7 +121,7 @@
                         <?php
                     }
                 }
-                // Collect sales data for chart
+                
                 $chart_dates = [];
                 $chart_quantities = [];
                 $chart_data = $conn->query("SELECT sale_date, SUM(quantity_sold) as total_qty FROM sales WHERE sale_date >= CURDATE() - INTERVAL 30 DAY GROUP BY sale_date ORDER BY sale_date ASC");
@@ -137,7 +137,7 @@
                     ORDER BY s.sale_date DESC
                 ");
                 while ($row = $result->fetch_assoc()) {
-                    // If editing this row, skip displaying it in the list
+                    
                     if (isset($_GET['edit']) && $_GET['edit'] == $row['sale_id']) continue;
                     echo "<tr>
                             <td>{$row['sale_id']}</td>
@@ -161,7 +161,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
-// Chart.js for sales in last 30 days
+
 const ctx = document.getElementById('salesChart').getContext('2d');
 const salesChart = new Chart(ctx, {
     type: 'bar',
@@ -186,16 +186,16 @@ const salesChart = new Chart(ctx, {
         }
     }
 });
-// PDF download
+
 const downloadBtn = document.getElementById('download-pdf');
 downloadBtn.addEventListener('click', function() {
     const pdf = new window.jspdf.jsPDF('l', 'pt', 'a4');
-    // Chart
+    
     html2canvas(document.getElementById('salesChart')).then(function(canvas) {
         const imgData = canvas.toDataURL('image/png');
         pdf.text('Sales Report (Last 30 Days)', 40, 40);
         pdf.addImage(imgData, 'PNG', 40, 60, 700, 200);
-        // Table
+        
         html2canvas(document.getElementById('sales-report-table')).then(function(tableCanvas) {
             const tableImg = tableCanvas.toDataURL('image/png');
             pdf.addPage();
