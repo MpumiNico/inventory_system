@@ -50,13 +50,13 @@
             </div>
         </form>
         <?php
-        // Handle form submission
+        
         if (isset($_POST['update'])) {
             $product_id = $_POST['product_id'];
             $qty = $_POST['qty'];
             $min = $_POST['min'];
 
-            // Check if stock record exists
+            
             $check = $conn->query("SELECT * FROM stock WHERE product_id = $product_id");
             if ($check->num_rows > 0) {
                 $conn->query("UPDATE stock SET quantity = $qty, min_threshold = $min WHERE product_id = $product_id");
@@ -84,7 +84,7 @@
                 </thead>
                 <tbody>
                 <?php
-                // Edit stock logic
+                
                 if (isset($_POST['update_stock'])) {
                     $id = intval($_POST['id']);
                     $qty = intval($_POST['qty']);
@@ -94,13 +94,13 @@
                     $stmt->execute();
                     echo "<div class='alert alert-success mt-3 animate__animated animate__fadeInDown'>Stock updated successfully!</div>";
                 }
-                // Delete stock logic
+                
                 if (isset($_GET['delete'])) {
                     $id = intval($_GET['delete']);
                     $conn->query("DELETE FROM stock WHERE product_id=$id");
                     echo "<div class='alert alert-danger mt-3 animate__animated animate__fadeInDown'>Stock deleted.</div>";
                 }
-                // Display edit form if edit param is set
+                
                 if (isset($_GET['edit'])) {
                     $edit_id = intval($_GET['edit']);
                     $edit_result = $conn->query("SELECT s.*, p.product_name FROM stock s JOIN products p ON s.product_id = p.product_id WHERE s.product_id=$edit_id");
@@ -125,7 +125,7 @@
                 }
                 $result = $conn->query("SELECT s.*, p.product_name FROM stock s JOIN products p ON s.product_id = p.product_id");
                 while ($row = $result->fetch_assoc()) {
-                    // If editing this row, skip displaying it in the list
+                    
                     if (isset($_GET['edit']) && $_GET['edit'] == $row['product_id']) continue;
                     echo "<tr>
                             <td>{$row['product_id']}</td>
