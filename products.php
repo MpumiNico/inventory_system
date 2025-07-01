@@ -44,7 +44,7 @@
     <div class="card p-4 mb-4 animate__animated animate__fadeInUp" style="width: 100%; max-width: 600px;">
         <h2 class="mb-4 text-center"><i class="bi bi-bag-plus-fill me-2"></i>Add New Product</h2>
         <?php
-        // Fetch suppliers for dropdown
+        
         $suppliers = $conn->query("SELECT supplier_id, supplier_name FROM suppliers");
         ?>
         <form method="post" class="row g-3">
@@ -70,7 +70,7 @@
             </div>
         </form>
         <?php
-        // Add new product
+        
         if (isset($_POST['add'])) {
             $name = $conn->real_escape_string($_POST['name']);
             $desc = $conn->real_escape_string($_POST['desc']);
@@ -83,14 +83,14 @@
             echo "<div class='alert alert-success mt-3 animate__animated animate__fadeInDown'>Product added successfully!</div>";
         }
 
-        // Delete product
+        
         if (isset($_GET['delete'])) {
             $id = intval($_GET['delete']);
-            // Delete related sales
+            
             $conn->query("DELETE FROM sales WHERE product_id=$id");
-            // Delete related stock
+            
             $conn->query("DELETE FROM stock WHERE product_id=$id");
-            // Now delete the product
+            
             $conn->query("DELETE FROM products WHERE product_id=$id");
             echo "<div class='alert alert-danger mt-3 animate__animated animate__fadeInDown'>Product deleted.</div>";
         }
@@ -112,7 +112,7 @@
                 </thead>
                 <tbody>
                 <?php
-                // Edit product logic
+                
                 if (isset($_POST['update'])) {
                     $id = intval($_POST['id']);
                     $name = $conn->real_escape_string($_POST['name']);
@@ -124,13 +124,13 @@
                     $stmt->execute();
                     echo "<div class='alert alert-success mt-3 animate__animated animate__fadeInDown'>Product updated successfully!</div>";
                 }
-                // Display edit form if edit param is set
+                
                 if (isset($_GET['edit'])) {
                     $edit_id = intval($_GET['edit']);
                     $edit_result = $conn->query("SELECT * FROM products WHERE product_id=$edit_id");
                     if ($edit_result && $edit_result->num_rows > 0) {
                         $edit_row = $edit_result->fetch_assoc();
-                        // Fetch suppliers again for dropdown
+                        
                         $suppliers = $conn->query("SELECT supplier_id, supplier_name FROM suppliers");
                         ?>
                         <tr>
@@ -156,11 +156,11 @@
                         <?php
                     }
                 }
-                // Display products
+                
                 $result = $conn->query("SELECT p.*, s.supplier_name FROM products p LEFT JOIN suppliers s ON p.supplier_id = s.supplier_id");
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        // If editing this row, skip displaying it in the list
+                        
                         if (isset($_GET['edit']) && $_GET['edit'] == $row['product_id']) continue;
                         echo "<tr>
                                 <td>{$row['product_id']}</td>
